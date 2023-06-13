@@ -6,13 +6,7 @@ services:
     volumes:
       - type: volume
         target: /code/media
-      # - type: bind
-      #   source: .env
-      #   target: /code/.env
-      # - type: bind
-      #   source: db.sqlite3
-      #   target: /code/db.sqlite3
-
-# configs:
-#   db:
-#     file: ./db.sqlite3
+      - ./.env:/code/.env:ro
+      - type: bind
+        source: db.sqlite3
+        target: /code/db.sqlite3
