@@ -130,9 +130,11 @@ REST_FRAMEWORK = {
     ],
 }
 
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = "jwt-auth-token"
-JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "jwt-auth-token",
+    "JWT_AUTH_REFRESH_COOKIE": "jwt-refresh-token",
+}
 
 ROOT_URLCONF = "config.urls"
 
