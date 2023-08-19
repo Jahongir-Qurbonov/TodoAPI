@@ -1,7 +1,14 @@
 services:
-  todoapi:
+  api:
     build: .
+    container_name: todo-api
     ports:
-      - 8000:8000
+      - mode: host
+        target: 8000
+        published: 8000
     volumes:
-      - /code/media
+      - ./:/var/app
+      - api-media:/var/app/media
+
+volumes:
+  api-media:
