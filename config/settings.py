@@ -35,10 +35,10 @@ except:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", False)
+DEBUG = env.bool("DEBUG", True)
 
 # Allowed hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ["localhost", "127.0.0.1:8000", "0.0.0.0"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ["localhost", "127.0.0.1", "0.0.0.0"])
 
 # Site configuration
 SITE_ID = env.int("SITE_ID", 1)

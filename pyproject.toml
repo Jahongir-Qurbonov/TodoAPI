@@ -6,8 +6,8 @@ authors = ["Jahongir Qurbonov <qurbonovjahongir17@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-django = "^4.2.3"
+python = "^3.10"
+django = "^4.2.2"
 dj-rest-auth = "^4.0.1"
 environs = "^9.5.0"
 django-allauth = "^0.54.0"
