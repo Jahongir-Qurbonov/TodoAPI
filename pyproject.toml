@@ -7,14 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^4.2.7"
+django = "^4.2.11"
 dj-rest-auth = "^4.0.1"
 environs = "^9.5.0"
 django-allauth = "^0.54.0"
 django-cors-headers = "^4.0.0"
 drf-yasg = "^1.21.5"
 django-extensions = "^3.2.3"
-djangorestframework-simplejwt = "^5.2.2"
+djangorestframework-simplejwt = "^5.3.1"
 django-ranged-fileresponse = "^0.1.2"
 whitenoise = "^6.4.0"
 
