@@ -10,38 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
-from environs import Env
+
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Environs settings
-env = Env()
-env.read_env()
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-try:
-    SECRET_KEY = env.str("SECRET_KEY")
-except:
-    from scripts.auto_configure import set_random_generate_secret_key
-
-    SECRET_KEY = set_random_generate_secret_key(env)
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", True)
+DEBUG = bool(os.environ.get("DEBUG"))
 
 # Allowed hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ["localhost", "127.0.0.1", "0.0.0.0"])
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
 
 # Site configuration
-SITE_ID = env.int("SITE_ID", 1)
+SITE_ID = int(os.environ.get("SITE_ID", 1))
 
 # Application definition
 

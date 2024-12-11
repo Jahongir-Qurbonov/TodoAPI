@@ -282,4 +282,4 @@ poetry.toml
 
 # Custom
 # Staticfiles
-staticfiles/*
+todo_api/staticfiles/*

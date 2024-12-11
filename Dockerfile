@@ -1,34 +1,21 @@
-FROM python:3.10-alpine
+FROM python:3.13
 
-ARG IMAGE_USER="user"
-ENV PUID=1000 PGID=1000 PUSER=$IMAGE_USER
-ENV POETRY_HOME=/etc/poetry PYTHONUNBUFFERED=1
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
 
-RUN apk add --no-cache  \
-    curl \
-    build-base \
-    openssl-dev \
-    libjpeg-turbo-dev \
-    libwebp-dev \
-    zlib-dev
+ADD https://astral.sh/uv/install.sh /uv-installer.sh
 
-WORKDIR /var/app
+RUN sh /uv-installer.sh && rm /uv-installer.sh
 
-RUN addgroup -S -g $PGID $IMAGE_USER &&  \
-    adduser -S -s /bin/sh -G $IMAGE_USER -u $PGID $IMAGE_USER && \
-    chown -R $PUID:$PGID /var/app
+ENV PATH="/root/.local/bin/:$PATH"
 
-RUN curl -sSL https://install.python-poetry.org | python -
-ENV PATH=$PATH:$POETRY_HOME/bin:/var/app
+ADD . /app
 
-COPY --chown=$IMAGE_USER:$IMAGE_USER . .
+WORKDIR /app
+RUN uv sync --frozen
 
-RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-root
-USER $IMAGE_USER
-
-RUN python manage.py migrate
-RUN python manage.py runscript -v3 auto_configure
-RUN python manage.py collectstatic
+RUN uv run python manage.py migrate
+RUN uv run python manage.py runscript -v3 auto_configure
+RUN uv run python manage.py collectstatic
 
 CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000" ]
 
